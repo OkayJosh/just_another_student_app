@@ -87,6 +87,7 @@ class Parent(models.Model):
 
 class Book(models.Model):
     owned_by = models.ForeignKey(Student, related_name="has_books", on_delete=models.CASCADE)
+
     title_of_the_text_book = models.CharField(max_length=255)
     date_of_collection = models.DateField(max_length=255, null=True, blank=True)
     distribution_personnel = models.CharField(max_length=255, null=True, blank=True)
@@ -96,6 +97,7 @@ class Book(models.Model):
 
 class Literacy(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
+
     date_of_accessment = models.DateField(blank=True, null=True)
     literacy_level = models.CharField(max_length=100, blank=True, null=True)
     literacy_score = models.IntegerField(validators=[MaxValueValidator(10), MinValueValidator(1)], default="3")
@@ -121,6 +123,7 @@ class Attendance(models.Model):
 
 class Incentive(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
+
     incentive_code = models.CharField(max_length=50, blank=True, null=True)
     date_of_collection_of_incentive = models.DateField(blank=True, null=True)
 
@@ -133,6 +136,7 @@ class Incentive(models.Model):
 
 class Appraisal(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    
     subject_code = models.CharField(max_length=200, blank=True, null=True)
     date_of_appraisal = models.DateField(blank=True, null=True)
 
