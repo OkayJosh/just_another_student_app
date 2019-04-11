@@ -66,8 +66,11 @@ class Student(models.Model):
 class Parent(models.Model):
 
     student = models.OneToOneField(Student, on_delete=models.CASCADE)
+
     full_name_of_the_father = models.CharField(max_length=300)
+
     current_passport_photograph_of_the_father = models.ImageField(default='default.jpg', blank=True, null=True)
+    
     occupation_of_the_father = models.CharField(max_length=200, default='address', blank=True, null=True)
     contact_address_of_the_father = models.CharField(max_length=200, blank=True, null=True)
     contact_telephone_number_of_the_father = models.CharField(max_length=200, blank=True, null=True)

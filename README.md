@@ -1,1 +1,1 @@
-# This is a student app accprding to the nemis framework
+# This is a student app according to the nemis framework
