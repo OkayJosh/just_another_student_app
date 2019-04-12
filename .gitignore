@@ -1,5 +1,5 @@
 /stapp
-/*migrations
+*/migrations
 /db.sqlite
 *.pyc
 */__pycache__
