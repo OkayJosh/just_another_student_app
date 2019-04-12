@@ -51,7 +51,7 @@ class DetailStudentView(DetailView):
 
         def get_context_data(self, **kwargs):
                 context = super().get_context_data(**kwargs)
-                
+
                 context['parent'] = Parent.objects.get(
                         student = Student.objects.get(id=self.kwargs['pk'])
                         )
@@ -294,6 +294,7 @@ class CreateAbsenceRecordFormView(CreateView):
                 instance.save()
                 self.object = form.save()
                 return super().form_valid(form)
+                
 class UpdateAbsenceRecordFormView(UpdateView):
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug' 
