@@ -7,7 +7,9 @@ from .forms import (StudentForm, ParentForm, BookForm, LiteracyForm,
                     AttendanceForm, IncentiveForm, AppraisalForm, 
                     PostingForm, AbsenceRecordForm, OutOfSchoolForm, 
                     ReturnToSchoolForm, FeedingForm)
-from .models import Student, Parent
+from .models import (Student, Parent, Book, Literacy, Attendance, Incentive,
+                     Appraisal, Posting, AbsenceRecord, OutOfSchool, ReturnToSchool,
+                     Feeding)
 
 class HomeView(ListView):
     template_name = 'student/home.html'
@@ -39,7 +41,7 @@ class UpdateStudentFormView(UpdateView):
         form_class = StudentForm
         success_url = 'home'
 
-class DetailsStudentView(DetailView):
+class DetailStudentView(DetailView):
         template_name = 'student/details.html'
         model = Student
         content_type = None 
@@ -49,8 +51,40 @@ class DetailsStudentView(DetailView):
 
         def get_context_data(self, **kwargs):
                 context = super().get_context_data(**kwargs)
+                
                 context['parent'] = Parent.objects.get(
-                        student=Student.objects.get(id=self.kwargs['pk']))
+                        student = Student.objects.get(id=self.kwargs['pk'])
+                        )
+                context['book'] = Book.objects.filter(
+                        student = Student.objects.get(id=self.kwargs['pk'])
+                        )
+                context['literacy'] = Literacy.objects.filter(
+                        student = Student.objects.get(id=self.kwargs['pk'])
+                        )
+                context['attendance'] = Attendance.objects.filter(
+                        student = Student.objects.get(id=self.kwargs['pk'])
+                        )
+                context['incentive'] = Incentive.objects.filter(
+                        student = Student.objects.get(id=self.kwargs['pk'])
+                        )
+                context['appraisal'] = Appraisal.objects.filter(
+                        student = Student.objects.get(id=self.kwargs['pk'])
+                        )
+                context['posting'] = Posting.objects.filter(
+                        student = Student.objects.get(id=self.kwargs['pk'])
+                        )
+                context['absence'] = AbsenceRecord.objects.filter(
+                        student = Student.objects.get(id=self.kwargs['pk'])
+                        )
+                context['out'] = OutOfSchool.objects.filter(
+                        student = Student.objects.get(id=self.kwargs['pk'])
+                        )
+                context['return'] = ReturnToSchool.objects.filter(
+                        student = Student.objects.get(id=self.kwargs['pk'])
+                        )
+                context['feeding'] = Feeding.objects.filter(
+                        student = Student.objects.get(id=self.kwargs['pk'])
+                        )
                 return context
 
 class CreateParentFormView(CreateView):
@@ -340,7 +374,7 @@ class CreateFeedingFormView(CreateView):
                 instance.save()
                 self.object = form.save()
                 return super().form_valid(form)
-                
+
 class UpdateFeedingFormView(UpdateView):
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug' 
