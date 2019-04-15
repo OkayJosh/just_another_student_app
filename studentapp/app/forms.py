@@ -47,20 +47,19 @@ class  AttendanceForm(ModelForm):
         exclude = ['student']
 
 class IncentiveForm(ModelForm):
-    """"
+    """
     The Incentive Form
-    
-    """"
 
+    """
     class Meta:
         model = Incentive
         exclude = ['student']
 
 class AppraisalForm(ModelForm):
-    """"
+    """
     The Appraisal Form
 
-    """"
+    """
 
     class Meta:
         model = Appraisal

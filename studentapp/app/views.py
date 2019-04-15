@@ -19,8 +19,9 @@ class HomeView(ListView):
 class CreateStudentFormView(CreateView):
         template_name = 'student/create.html'
         form_class =  StudentForm
-        success_url = 'home'
-        content_type = None 
+        success_url = '/'
+        content_type = None
+        model = Student
 
         def form_valid(self, form):
                 """
