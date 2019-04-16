@@ -18,7 +18,7 @@ class Student(models.Model):
 
     full_name = models.CharField(max_length=300)
 
-    gender = models.CharField(max_length=1, choices=GENDER)
+    gender = models.CharField(max_length=1, choices=GENDER, blank=True, null=True)
 
     current_passport_photograph = models.ImageField(default='default.jpg',
                          blank=True, null=True)
@@ -48,7 +48,7 @@ class Student(models.Model):
 
     date_of_birth = models.DateField( blank=True, null=True)
 
-    place_of_birth = models.CharField(max_length=300)
+    place_of_birth = models.CharField(max_length=300, blank=True, null=True)
 
     finger_print = models.CharField(max_length=300, blank=True, null=True)
 
