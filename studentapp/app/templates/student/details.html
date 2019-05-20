@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+
+  {% block heading %}
+    <div class=" container">
+        <div class=""> 
+            <h1 class="">{{ object }}</h1>
+        </div>
+    </div>
+  {% endblock heading %}
+  
+  {% block content %}
+    <div class="row">
+        <div class="container"><h5 class="bold">{{object.reason_for_admission}}<br>
+            <h5><a href="{% url 'parent' object.pk object.slug %}"><i class="material-icons large">person</i></a>
+            <a href="{% url 'book' object.pk object.slug%}" class=""><i class="material-icons large">book</i></a>
+            <a href="{% url 'literacy' object.pk object.slug%}" class=""><i class="material-icons large">blur_circular</i></a>
+            <a href="{% url 'incentive' object.pk object.slug%}" class=""><i class="material-icons large">blur_on</i></a>
+            <a href="{% url 'appraisal' object.pk object.slug%}" class=""><i class="material-icons large">brightness_5</i></a>
+            <a href="{% url 'posting' object.pk object.slug%}" class=""><i class="material-icons large">build</i></a>
+            <a href="{% url 'absence' object.pk object.slug%}" class=""><i class="material-icons large">call_missed</i></a>
+            <a href="{% url 'out' object.pk object.slug%}" class=""><i class="material-icons large">call_made</i></a>
+            <a href="{% url 'return' object.pk object.slug%}" class=""><i class="material-icons large">call_received</i></a></h5> 
+            <div class="col">
+                <div class="dashboard">FGN Code: {{object.federal_goverment_code}}</div>
+            </div>
+            <div class="col">
+                <div class="dashboard">Addmission Number: {{object.addmission_number_of_student}}</div>
+            </div>
+            <div class="col">  
+                <div class="dashboard">State of Residence: {{object.state_residence}}</div>
+            </div> 
+        </div>
+    </div>
+    <div class="container">
+        <table>
+                <thead>
+                    <tr>
+                        <th>List of Books</th>
+                        <th>    </th>
+                    </tr>
+                    <tr>
+                        <th>Name</i></th>
+                        <th>collection date</th>
+                        <th>Distributed by</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for book in books %}
+                        <tr>
+                            <td><a>{{ book.title_of_the_text_book }} </a> </td>
+                            <td><a>{{ book.date_of_collection }}</a></td>
+                            <td><a href="{% url 'book_update' book.id%}"><i class="material-icons">book</i></a></td>
+                            </tr>
+                    {% endfor %}
+            </table>
+            <table>
+                    <thead>
+                        <tr>
+                            <th> Student's Parent info</th>
+                            <th>    </th>
+                        </tr>
+                        <tr>
+                            <th>Name</i></th>
+                            <th>State</th>
+                            <th>Address</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                            <tr>
+                                <td><a>{{ parent.occupation_of_the_father }}  {{ parent.current_passport_photograph_of_the_mother}} </a></td>
+                                <td><a>{{ parent.full_name_of_the_father }} {{ parent.full_name_of_the_mother }}</a></td>
+                                <td><a href="{% url 'parent_update' %}"><i class="material-icons">person</i></a></td>
+                                </tr>
+                </table>
+
+    </div>
+  {% endblock content %}
+
+  {% block morecontent %}
+            <div class="">
+                <div class="">
+                Student Literacy
+                <div>
+                <div class="">
+
+                <div> Literacy score : {{ literacy.literacy_score}} <div>
+                <div> Date of assement : {{ literacy.literacy_score}} <div>
+
+
+                <div>
+            <div>
+
+  {% endblock morecontent%}

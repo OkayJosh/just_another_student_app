@@ -1,6 +1,7 @@
 from django.db import models
 
 from django.contrib.auth.models import User
+from django.template.defaultfilters import slugify
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 
@@ -17,6 +18,8 @@ class Student(models.Model):
     addmission_number_of_student = models.CharField(max_length=300, blank=True, null=True)
 
     full_name = models.CharField(max_length=300)
+
+    slug = models.SlugField(max_length=300, verbose_name = "slug")
 
     gender = models.CharField(max_length=1, choices=GENDER, blank=True, null=True)
 
@@ -46,19 +49,22 @@ class Student(models.Model):
     state_residence = models.CharField(max_length=20, null=True, 
                         default='state residence', blank=True)
 
-    date_of_birth = models.DateField( blank=True, null=True)
+    date_of_birth = models.DateField( blank=True, null=True, help_text="YYYY-MM-DD")
 
     place_of_birth = models.CharField(max_length=300, blank=True, null=True)
 
-    finger_print = models.CharField(max_length=300, blank=True, null=True)
 
     email_address = models.CharField(max_length=300, blank=True, null=True)
 
-    date_of_admision = models.DateField(max_length=300, blank=True, null=True)
+    date_of_admision = models.DateField(max_length=300, blank=True, null=True, help_text="YYYY-MM-DD")
 
-    Reason_for_admission = models.CharField(max_length=300, blank=True, null=True)
+    reason_for_admission = models.CharField(max_length=300, blank=True, null=True)
 
     admission_entry_point = models.CharField(max_length=300, blank=True, null=True)
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.full_name)
+        return super(Student, self).save(*args, **kwargs)
 
     def __str__(self):
         return self.full_name
@@ -76,7 +82,7 @@ class Parent(models.Model):
     contact_telephone_number_of_the_father = models.CharField(max_length=200, blank=True, null=True)
 
     full_name_of_the_mother = models.CharField(max_length=300)
-    current_passport_photograph_of_the_father = models.ImageField(default='default.jpg', blank=True, null=True)
+    current_passport_photograph_of_the_mother = models.ImageField(default='default.jpg', blank=True, null=True)
     occupation_of_the_mother = models.CharField(max_length=200, default='address', blank=True, null=True)
     contact_address_of_the_mother = models.CharField(max_length=200, blank=True, null=True)
     contact_telephone_number_of_the_mother = models.CharField(max_length=200, blank=True, null=True)
@@ -89,7 +95,7 @@ class Book(models.Model):
     owned_by = models.ForeignKey(Student, related_name="has_books", on_delete=models.CASCADE)
 
     title_of_the_text_book = models.CharField(max_length=255)
-    date_of_collection = models.DateField(max_length=255, null=True, blank=True)
+    date_of_collection = models.DateField(max_length=255, null=True, blank=True, help_text="YYYY-MM-DD")
     distribution_personnel = models.CharField(max_length=255, null=True, blank=True)
 
     def __str__(self):
@@ -98,7 +104,7 @@ class Book(models.Model):
 class Literacy(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
 
-    date_of_accessment = models.DateField(blank=True, null=True)
+    date_of_accessment = models.DateField(blank=True, null=True, help_text="YYYY-MM-DD")
     literacy_level = models.CharField(max_length=100, blank=True, null=True)
     literacy_score = models.IntegerField(validators=[MaxValueValidator(10), MinValueValidator(1)], default="3")
     describe_literacy = models.TextField("Describe the Literacy of the Student", null=True, blank=True)
@@ -113,7 +119,7 @@ class Attendance(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     attendance_code = models.CharField(max_length=200, blank=True, null=True)
 
-    date_of_attendance = models.DateField(auto_now_add=True, null=True, blank=True)
+    date_of_attendance = models.DateField(auto_now_add=True, null=True, blank=True, help_text="YYYY-MM-DD")
 
     clock_in_time = models.BooleanField(blank=True, null=True)
     clock_out_time = models.BooleanField(blank=True, null=True)
@@ -125,7 +131,7 @@ class Incentive(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
 
     incentive_code = models.CharField(max_length=50, blank=True, null=True)
-    date_of_collection_of_incentive = models.DateField(blank=True, null=True)
+    date_of_collection_of_incentive = models.DateField(blank=True, null=True, help_text="YYYY-MM-DD")
 
 
     reason_of_incentive = models.CharField(max_length=255, null=True, blank=True)
@@ -138,7 +144,7 @@ class Appraisal(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
     
     subject_code = models.CharField(max_length=200, blank=True, null=True)
-    date_of_appraisal = models.DateField(blank=True, null=True)
+    date_of_appraisal = models.DateField(blank=True, null=True, help_text="YYYY-MM-DD")
 
     subject_name = models.CharField(max_length=200, blank=True, null=True)
     subject_examination_score = models.IntegerField(blank=True, null=True)
@@ -153,7 +159,7 @@ class Appraisal(models.Model):
 class Posting(models.Model):
     student = models.OneToOneField(Student, on_delete=models.CASCADE)
     name_of_school = models.CharField(max_length=200, blank=True, null=True)
-    date_of_posting = models.DateField("Date of Posting")
+    date_of_posting = models.DateField("Date of Posting", help_text="YYYY-MM-DD")
     reason_for_posting = models.CharField(max_length=200, blank=True, null=True)
 
     def __str__(self):
@@ -163,7 +169,7 @@ class AbsenceRecord(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
 
     absence_code = models.CharField(max_length=50)
-    date_of_review = models.DateField(blank=True, null=True)
+    date_of_review = models.DateField(blank=True, null=True, help_text="YYYY-MM-DD")
 
     days_of_absence = models.IntegerField(blank=True, null=True)
     reason_for_absence = models.TextField(blank=True, null=True)
@@ -173,7 +179,7 @@ class OutOfSchool(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
 
     out_of_school_code = models.CharField(max_length=200, blank=True, null=True)
-    date_of_review = models.DateField(auto_now_add=True, blank=True, null=True)
+    date_of_review = models.DateField(auto_now_add=True, blank=True, null=True, help_text="YYYY-MM-DD")
     summary_of_interview = models.TextField(blank=True, null=True)
     reason_for_dropping_out = models.TextField(blank=True, null=True)
     recommendation = models.TextField(blank=True, null=True)
@@ -195,7 +201,7 @@ class Feeding(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
 
     feeding_code = models.CharField(max_length=200, blank=True, null=True)
-    date_of_review = models.DateField(auto_now_add=True, blank=True, null=True)
+    date_of_review = models.DateField(auto_now_add=True, blank=True, null=True, help_text="YYYY-MM-DD")
 
     total_days_of_attendance = models.IntegerField(blank=True, null=True)
     feeding_days = models.IntegerField(blank=True, null=True)

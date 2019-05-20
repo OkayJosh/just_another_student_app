@@ -9,7 +9,7 @@ class StudentForm(ModelForm):
     """
     class Meta:
         model = Student
-        exclude = ['created_by']
+        exclude = ['created_by', 'slug']
 
 class ParentForm(ModelForm):
     """

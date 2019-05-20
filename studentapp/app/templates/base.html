@@ -9,13 +9,19 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
    <!-- Compiled and minified CSS -->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+
+  <!---- Load local css ---->
+  {% load  static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
     <title>Student App</title>
   </head>
   <body>
-  <nav>
-    <div class="nav-wrapper pink darken-1">
+  <nav class="nav-background-image">
+    <div class="nav-wrapper pink darken-1 ">
       <a href="{% url 'home' %}" class="brand-logo btn-floating btn-large center pink-darken-1"><i class="material-icons">person_pin</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
         <li><a href="">login</a></li>
@@ -32,12 +38,22 @@
   {% endblock heading %}
 
   {% block content %}
- 
+ {% comment %} content here {% endcomment %}
   {% endblock content %}
- 
+  
+  {% block morecontent %}
+  {% comment %} more content  here {% endcomment %}
+  {% endblock morecontent %}
 
-    <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-            
+{% block footer %}
+  <footer>
+    
+  </footer>
+{% endblock footer %}
+
+         
   </body>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 </html>

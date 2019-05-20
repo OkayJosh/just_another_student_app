@@ -1,15 +1,14 @@
 {% extends "base.html" %}
 
   {% block heading %}
-    <div class="container">
-        <h1>Nemis Student Management App!</h1>
-        <div class="wrap">
-            <h5><a href={% url 'create' %} class="btn-floating btn-large pulse pink darken-1"><i class="material-icons">add_circle</i></a></h5>
-            {% comment %} <h5><a href={% url 'list' %} class="btn-floating pink darken-1"><i class="material-icons">format_list_bulleted</i></a></h5> {% endcomment %}
-        </div>
+  <div class="container"> 
+    <h1>Students Management</h1>
+    <div class="wrap">
+        <h5><a href={% url 'create' %} class="btn-floating btn-large pulse pink darken-1"><i class="material-icons">add_circle</i></a></h5>
     </div>
+  </div>
     <div class="container">
-        {% comment %} <table>
+        <table>
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -17,18 +16,18 @@
                     </tr>
                     <tr>
                         <th><i class="material-icons">edit</i></th>
-                        <th>Identification Number</th>
-                        <th>Owner</th>
+                        <th>Addmission  Number</th>
+                        <th>Reason for Admission</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {% for project in projects %}
+                    {% for student in students %}
                         <tr>
-                            <td><a href="{% url 'profile' project.pk project.slug %}">{{ project }} </a> </td>
-                            <td><a href="{% url 'update_project' project.pk project.slug %}"><i class="">{{ project.id_num}}</i></a></td>
-                            <td><a><i class="">{{ project.owner}}</i></a></td>
+                            <td><a href="{% url 'details' student.pk student.slug %}">{{ student }} </a> </td>
+                            <td><a href="{% url 'update' student.pk student.slug %}"><i class="">{{ student.addmission_number_of_student}}</i></a></td>
+                            <td><a><i class="">{{ student.reason_for_admission}}</i></a></td>
                             </tr>
                     {% endfor %}
-            </table> {% endcomment %}
+            </table>
     </div>
   {% endblock heading %}

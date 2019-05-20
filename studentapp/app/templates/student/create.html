@@ -8,10 +8,15 @@
 
   {% block content %}
     <div class="container"> 
+      <div class="form">
         <form action="" method="post">
             {% csrf_token %}
-            {{ form.as_p }}
+            {% load crispy_forms_tags %}
+            {% comment %} {% load crispy_forms_field %}
+            {% load crispy_forms_filters %} {% endcomment %}
+            {{ form | crispy }}
             <button class="btn-floating btn-large pulse pink darken-1"> <i class="material-icons">add</i></a></button>
         </form>
+      </div>
     </div>
   {% endblock content %}

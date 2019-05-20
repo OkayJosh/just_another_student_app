@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+  {% block heading %}
+    <div class="container">
+      <h1>Update  Attendance!</h1>
+    </div>
+  {% endblock heading %}
+
+  {% block content %}
+    <div class="container"> 
+         <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button class="btn-floating btn-large pulse pink darken-1"> <i class="material-icons">add</i></a></button>
+        </form>
+    </div>
+  {% endblock content %}

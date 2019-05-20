@@ -26,13 +26,13 @@ urlpatterns = [
     path('parent/<int:pk>/<slug:slug>', CreateParentFormView.as_view(), 
     name='parent'),
 
-    path('parent/update/<int:pk>/<slug:slug>', UpdateParentFormView.as_view(), 
+    path('parent/update/<int:pk/', UpdateParentFormView.as_view(), 
     name='parent_update'),
 
     path('book/<int:pk>/<slug:slug>', CreateBookFormView.as_view(), 
     name='book'),
 
-    path('book/update/<int:pk>/<slug:slug>', UpdateBookFormView.as_view(), 
+    path('book/update/<int:pk>/', UpdateBookFormView.as_view(), 
     name='book_update'),
 
     path('literacy/<int:pk>/<slug:slug>', CreateLiteracyFormView.as_view(), 

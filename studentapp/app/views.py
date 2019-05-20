@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse
+from django.shortcuts import get_object_or_404
 from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView
@@ -12,9 +13,14 @@ from .models import (Student, Parent, Book, Literacy, Attendance, Incentive,
                      Feeding)
 
 class HomeView(ListView):
-    template_name = 'student/home.html'
-    model = Student
-    content_type = None 
+        template_name = 'student/home.html'
+        model = Student
+        content_type = None 
+
+        def get_context_data(self, **kwargs):
+                context = super().get_context_data(**kwargs)
+                context['students'] = Student.objects.all()
+                return context
 
 class CreateStudentFormView(CreateView):
         template_name = 'student/create.html'
@@ -35,12 +41,13 @@ class CreateStudentFormView(CreateView):
                 return super().form_valid(form)
 
 class UpdateStudentFormView(UpdateView):
+        model = Student # The model is required alongside the "form_class"
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug' 
         query_pk_and_slug = True
         template_name = 'student/update.html'
         form_class = StudentForm
-        success_url = 'home'
+        success_url = '/'
 
 class DetailStudentView(DetailView):
         template_name = 'student/details.html'
@@ -49,15 +56,20 @@ class DetailStudentView(DetailView):
         pk_url_kwarg = 'pk' 
         query_pk_and_slug = True
         slug_url_kwarg = 'slug'
+        # success_url = '/'
 
         def get_context_data(self, **kwargs):
                 context = super().get_context_data(**kwargs)
 
-                context['parent'] = Parent.objects.get(
-                        student = Student.objects.get(id=self.kwargs['pk'])
-                        )
-                context['book'] = Book.objects.filter(
-                        student = Student.objects.get(id=self.kwargs['pk'])
+                # context['students'] = Student.objects.get(id=self.kwargs['pk'])
+
+                # context['parent'] = Parent.objects.get(
+                #         student = Student.objects.get(id=self.kwargs['pk'])
+                #         )
+                # student = get_object_or_404(Student, pk=self.kwargs['pk'])
+
+                context['books'] = Book.objects.filter(
+                        owned_by = Student.objects.get(id=self.kwargs['pk'])
                         )
                 context['literacy'] = Literacy.objects.filter(
                         student = Student.objects.get(id=self.kwargs['pk'])
@@ -93,8 +105,7 @@ class CreateParentFormView(CreateView):
         form_class =  ParentForm
         content_type = None
         pk_url_kwarg = 'pk'
-        slug_url_kwarg = 'slug'
-        success_url = 'home'
+        success_url = '/'  # Not working for some reasons may be to revert back to pk and slugs--- reating slug for the parent model
 
         def form_valid(self, form):
                 """
@@ -108,12 +119,10 @@ class CreateParentFormView(CreateView):
                 return super().form_valid(form)
 
 class UpdateParentFormView(UpdateView):
-        pk_url_kwarg = 'pk'
-        slug_url_kwarg = 'slug' 
-        query_pk_and_slug = True
+        model = Parent
         template_name = 'student/update_parent.html'
         form_class = ParentForm
-        success_url = 'home'
+        success_url = '/'
 
 class CreateBookFormView(CreateView):
         template_name = 'student/create_book.html'
