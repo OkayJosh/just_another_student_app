@@ -49,7 +49,7 @@
                         <tr>
                             <td><a>{{ book.title_of_the_text_book }} </a> </td>
                             <td><a>{{ book.date_of_collection }}</a></td>
-                            <td><a href="{% url 'book_update' book.id%}"><i class="material-icons">book</i></a></td>
+                            <td><a href="{% url 'book_update' book.id %}"><i class="material-icons">book</i></a></td>
                             </tr>
                     {% endfor %}
             </table>
@@ -69,25 +69,30 @@
                             <tr>
                                 <td><a>{{ parent.occupation_of_the_father }}  {{ parent.current_passport_photograph_of_the_mother}} </a></td>
                                 <td><a>{{ parent.full_name_of_the_father }} {{ parent.full_name_of_the_mother }}</a></td>
-                                <td><a href="{% url 'parent_update' %}"><i class="material-icons">person</i></a></td>
+                                <td><a href="{% url 'parent_update' object.id %}"><i class="material-icons">person</i></a></td>
                                 </tr>
                 </table>
+                <table>
+                        <thead>
+                            <tr>
+                                <th> Student's Literacy info</th>
+                                <th>    </th>
+                            </tr>
+                            <tr>
+                                <th>Date</i></th>
+                                <th>level | Score</th>
+                                <th>Description</th>
+                                <th>Asessor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr>
+                                    <td><a>{{ literacy_score.date_of_accessment }}</a></td>
+                                    <td><a href="{% url 'literacy_update' object.id object.slug %}">{{ literacy.literacy_level }} | {{ literacy.literacy_score }}</a></td>
+                                    <td><a>{{ literacy_score.describe_literacy }}</a></td>
+                                    <td><a>{{ literacy_score.name_of_assessor }}</a></td>
+                                    </tr>
+                    </table>
 
     </div>
   {% endblock content %}
-
-  {% block morecontent %}
-            <div class="">
-                <div class="">
-                Student Literacy
-                <div>
-                <div class="">
-
-                <div> Literacy score : {{ literacy.literacy_score}} <div>
-                <div> Date of assement : {{ literacy.literacy_score}} <div>
-
-
-                <div>
-            <div>
-
-  {% endblock morecontent%}

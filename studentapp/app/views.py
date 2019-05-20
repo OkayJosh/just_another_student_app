@@ -63,9 +63,9 @@ class DetailStudentView(DetailView):
 
                 # context['students'] = Student.objects.get(id=self.kwargs['pk'])
 
-                # context['parent'] = Parent.objects.get(
-                #         student = Student.objects.get(id=self.kwargs['pk'])
-                #         )
+                context['parent'] = Parent.objects.filter(
+                        student = Student.objects.filter(id=self.kwargs['pk'])
+                        )
                 # student = get_object_or_404(Student, pk=self.kwargs['pk'])
 
                 context['books'] = Book.objects.filter(
@@ -123,6 +123,9 @@ class UpdateParentFormView(UpdateView):
         template_name = 'student/update_parent.html'
         form_class = ParentForm
         success_url = '/'
+        # query_pk_and_slug = True
+        pk_url_kwarg = 'pk'
+        # slug_url_kwarg = 'slug'
 
 class CreateBookFormView(CreateView):
         template_name = 'student/create_book.html'

@@ -26,7 +26,7 @@ urlpatterns = [
     path('parent/<int:pk>/<slug:slug>', CreateParentFormView.as_view(), 
     name='parent'),
 
-    path('parent/update/<int:pk/', UpdateParentFormView.as_view(), 
+    path('parent/update/<int:pk>', UpdateParentFormView.as_view(), 
     name='parent_update'),
 
     path('book/<int:pk>/<slug:slug>', CreateBookFormView.as_view(), 
