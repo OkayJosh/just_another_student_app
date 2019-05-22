@@ -64,7 +64,7 @@ class DetailStudentView(DetailView):
                 # context['students'] = Student.objects.get(id=self.kwargs['pk'])
 
                 context['parent'] = Parent.objects.filter(
-                        student = Student.objects.filter(id=self.kwargs['pk'])
+                        student = Student.objects.get(id=self.kwargs['pk'])
                         )
                 # student = get_object_or_404(Student, pk=self.kwargs['pk'])
 
@@ -113,9 +113,9 @@ class CreateParentFormView(CreateView):
                 """
                 # the pk from the urls is stored in the kwargs
                 instance  = form.save(commit=False)
-                instance.owned_by = Student.objects.get(id=self.kwargs['pk'])
+                instance.student = Student.objects.get(id=self.kwargs['pk'])
                 instance.save()
-                self.object = form.save()
+                # self.object = form.save()
                 return super().form_valid(form)
 
 class UpdateParentFormView(UpdateView):
@@ -133,7 +133,7 @@ class CreateBookFormView(CreateView):
         content_type = None
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug'
-        success_url = 'home'
+        success_url = '/'
 
         def form_valid(self, form):
                 """
@@ -147,6 +147,7 @@ class CreateBookFormView(CreateView):
                 return super().form_valid(form)
 
 class UpdateBookFormView(UpdateView):
+        model = Book
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug' 
         query_pk_and_slug = True
@@ -174,6 +175,7 @@ class CreateLiteracyFormView(CreateView):
                 return super().form_valid(form)
 
 class UpdateLiteracyFormView(UpdateView):
+        model = Literacy
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug' 
         query_pk_and_slug = True
@@ -201,6 +203,7 @@ class CreateIncentiveFormView(CreateView):
                 return super().form_valid(form)
 
 class UpdateIncentiveFormView(UpdateView):
+        model = Incentive
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug' 
         query_pk_and_slug = True
@@ -228,6 +231,7 @@ class CreateAppraisalFormView(CreateView):
                 return super().form_valid(form)
 
 class UpdateAppraisalFormView(UpdateView):
+        model = Appraisal
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug' 
         query_pk_and_slug = True
@@ -255,6 +259,7 @@ class CreateAttendanceFormView(CreateView):
                 return super().form_valid(form)
 
 class UpdateAttendanceFormView(UpdateView):
+        model = Attendance
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug' 
         query_pk_and_slug = True
@@ -268,7 +273,7 @@ class CreatePostingFormView(CreateView):
         content_type = None
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug'
-        success_url = 'home'
+        success_url = '/'
 
         def form_valid(self, form):
                 """
@@ -276,18 +281,19 @@ class CreatePostingFormView(CreateView):
                 """
                 # the pk from the urls is stored in the kwargs
                 instance  = form.save(commit=False)
-                instance.owned_by = Student.objects.get(id=self.kwargs['pk'])
+                instance.student = Student.objects.get(id=self.kwargs['pk'])
                 instance.save()
                 self.object = form.save()
                 return super().form_valid(form)
 
 class UpdatePostingFormView(UpdateView):
-        pk_url_kwarg = 'pk'
-        slug_url_kwarg = 'slug' 
-        query_pk_and_slug = True
         template_name = 'student/update_posting.html'
+        model = Posting
+        pk_url_kwarg = 'pk'
+        # slug_url_kwarg = 'slug' 
+        # query_pk_and_slug = True
         form_class = PostingForm
-        success_url = 'home'
+        success_url = '/'
 
 class CreateAbsenceRecordFormView(CreateView):
         template_name = 'student/create_absence.html'

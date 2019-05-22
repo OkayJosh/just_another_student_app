@@ -49,7 +49,28 @@
                         <tr>
                             <td><a>{{ book.title_of_the_text_book }} </a> </td>
                             <td><a>{{ book.date_of_collection }}</a></td>
-                            <td><a href="{% url 'book_update' book.id %}"><i class="material-icons">book</i></a></td>
+                            <td><a href="{% url 'book_update' object.id %}"><i class="material-icons">book</i></a></td>
+                            </tr>
+                    {% endfor %}
+            </table>
+        <table>
+                <thead>
+                    <tr>
+                        <th>Posting Info</th>
+                        <th>    </th>
+                    </tr>
+                    <tr>
+                        <th>Name</i></th>
+                        <th>date</th>
+                        <th>Reason</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for post in posting %}
+                        <tr>
+                            <td><a>{{ post.name_of_school }} </a> </td>
+                            <td><a>{{ post.date_of_posting }}</a></td>
+                            <td><a href="{% url 'posting_update' object.id object.slug %}"> {{ post.reason_for_posting }} </a></td>
                             </tr>
                     {% endfor %}
             </table>
@@ -66,11 +87,13 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {% for p in parent %}
                             <tr>
-                                <td><a>{{ parent.occupation_of_the_father }}  {{ parent.current_passport_photograph_of_the_mother}} </a></td>
-                                <td><a>{{ parent.full_name_of_the_father }} {{ parent.full_name_of_the_mother }}</a></td>
+                                <td><a>{{ p.full_name_of_the_father }} and {{ p.full_name_of_the_mother }}</a></td>
                                 <td><a href="{% url 'parent_update' object.id %}"><i class="material-icons">person</i></a></td>
+                                <td><a>{{ p.contact_address_of_the_father }} and {{ p.contact_address_of_the_mother }}</a></td>
                                 </tr>
+                        {% endfor %}
                 </table>
                 <table>
                         <thead>
