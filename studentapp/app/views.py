@@ -267,22 +267,37 @@ class CreateLiteracyFormView(LoginRequiredMixin, CreateView):
                                         " a get_absolute_url method on the Model.")
                 return url
 
-class UpdateLiteracyFormView(UpdateView):
+class UpdateLiteracyFormView(LoginRequiredMixin, UpdateView):
         model = Literacy
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug' 
-        query_pk_and_slug = True
+        query_pk_and_slug = False
         template_name = 'student/update_literacy.html'
         form_class = LiteracyForm
-        success_url = 'home'
+        success_url = 'student:details'
+        login_url = 'login'
 
-class CreateIncentiveFormView(CreateView):
+        def get_success_url(self):
+                """Return the URL to redirect to after processing a valid form."""
+                if self.success_url and  self.kwargs != None:
+                        url = reverse(self.success_url.format(**self.object.__dict__), kwargs = {'pk': self.kwargs['pk'], 'slug': self.kwargs['slug']})       
+                else:
+                        try:
+                                url = self.object.get_absolute_url()
+                        except AttributeError:
+                                raise ImproperlyConfigured(
+                                        "No URL to redirect to.  Either provide a url or define"
+                                        " a get_absolute_url method on the Model.")
+                return url
+
+class CreateIncentiveFormView(LoginRequiredMixin, CreateView):
         template_name = 'student/create_incentive.html'
         form_class =  BookForm
         content_type = None
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug'
-        success_url = 'home'
+        success_url = 'student:details'
+        login_url = 'login'
 
         def form_valid(self, form):
                 """
@@ -295,22 +310,50 @@ class CreateIncentiveFormView(CreateView):
                 self.object = form.save()
                 return super().form_valid(form)
 
-class UpdateIncentiveFormView(UpdateView):
+        def get_success_url(self):
+                """Return the URL to redirect to after processing a valid form."""
+                if self.success_url and  self.kwargs != None:
+                        url = reverse(self.success_url.format(**self.object.__dict__), kwargs = {'pk': self.kwargs['pk'], 'slug': self.kwargs['slug']})       
+                else:
+                        try:
+                                url = self.object.get_absolute_url()
+                        except AttributeError:
+                                raise ImproperlyConfigured(
+                                        "No URL to redirect to.  Either provide a url or define"
+                                        " a get_absolute_url method on the Model.")
+                return url
+
+class UpdateIncentiveFormView(LoginRequiredMixin, UpdateView):
         model = Incentive
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug' 
-        query_pk_and_slug = True
+        query_pk_and_slug = False
         template_name = 'student/update_incentive.html'
         form_class = IncentiveForm
-        success_url = 'home'
+        success_url = 'student:details'
+        login_url = 'login'
 
-class CreateAppraisalFormView(CreateView):
+        def get_success_url(self):
+                """Return the URL to redirect to after processing a valid form."""
+                if self.success_url and  self.kwargs != None:
+                        url = reverse(self.success_url.format(**self.object.__dict__), kwargs = {'pk': self.kwargs['pk'], 'slug': self.kwargs['slug']})       
+                else:
+                        try:
+                                url = self.object.get_absolute_url()
+                        except AttributeError:
+                                raise ImproperlyConfigured(
+                                        "No URL to redirect to.  Either provide a url or define"
+                                        " a get_absolute_url method on the Model.")
+                return url
+
+class CreateAppraisalFormView(LoginRequiredMixin, CreateView):
         template_name = 'student/create_appraisal.html'
         form_class =  AppraisalForm
         content_type = None
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug'
-        success_url = 'home'
+        success_url = 'student:details'
+        login_url = 'login'
 
         def form_valid(self, form):
                 """
@@ -323,22 +366,50 @@ class CreateAppraisalFormView(CreateView):
                 self.object = form.save()
                 return super().form_valid(form)
 
-class UpdateAppraisalFormView(UpdateView):
+        def get_success_url(self):
+                """Return the URL to redirect to after processing a valid form."""
+                if self.success_url and  self.kwargs != None:
+                        url = reverse(self.success_url.format(**self.object.__dict__), kwargs = {'pk': self.kwargs['pk'], 'slug': self.kwargs['slug']})       
+                else:
+                        try:
+                                url = self.object.get_absolute_url()
+                        except AttributeError:
+                                raise ImproperlyConfigured(
+                                        "No URL to redirect to.  Either provide a url or define"
+                                        " a get_absolute_url method on the Model.")
+                return url
+
+class UpdateAppraisalFormView(LoginRequiredMixin, UpdateView):
         model = Appraisal
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug' 
-        query_pk_and_slug = True
+        query_pk_and_slug = False
         template_name = 'student/update_appraisal.html'
         form_class = AppraisalForm
-        success_url = 'home'
+        success_url = 'student:details'
+        login_url = 'login'
 
-class CreateAttendanceFormView(CreateView):
+        def get_success_url(self):
+                """Return the URL to redirect to after processing a valid form."""
+                if self.success_url and  self.kwargs != None:
+                        url = reverse(self.success_url.format(**self.object.__dict__), kwargs = {'pk': self.kwargs['pk'], 'slug': self.kwargs['slug']})       
+                else:
+                        try:
+                                url = self.object.get_absolute_url()
+                        except AttributeError:
+                                raise ImproperlyConfigured(
+                                        "No URL to redirect to.  Either provide a url or define"
+                                        " a get_absolute_url method on the Model.")
+                return url
+
+class CreateAttendanceFormView(LoginRequiredMixin, CreateView):
         template_name = 'student/create_attendance.html'
         form_class =  AttendanceForm
         content_type = None
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug'
-        success_url = 'home'
+        success_url = 'student:details'
+        login_url = 'login'
 
         def form_valid(self, form):
                 """
@@ -351,22 +422,50 @@ class CreateAttendanceFormView(CreateView):
                 self.object = form.save()
                 return super().form_valid(form)
 
-class UpdateAttendanceFormView(UpdateView):
+        def get_success_url(self):
+                """Return the URL to redirect to after processing a valid form."""
+                if self.success_url and  self.kwargs != None:
+                        url = reverse(self.success_url.format(**self.object.__dict__), kwargs = {'pk': self.kwargs['pk'], 'slug': self.kwargs['slug']})       
+                else:
+                        try:
+                                url = self.object.get_absolute_url()
+                        except AttributeError:
+                                raise ImproperlyConfigured(
+                                        "No URL to redirect to.  Either provide a url or define"
+                                        " a get_absolute_url method on the Model.")
+                return url
+
+class UpdateAttendanceFormView(LoginRequiredMixin,  UpdateView):
         model = Attendance
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug' 
-        query_pk_and_slug = True
+        query_pk_and_slug = False
         template_name = 'student/update_attendance.html'
         form_class = AttendanceForm
-        success_url = 'home'
+        success_url = 'student:details'
+        login_url = 'login'
 
-class CreatePostingFormView(CreateView):
+        def get_success_url(self):
+                """Return the URL to redirect to after processing a valid form."""
+                if self.success_url and  self.kwargs != None:
+                        url = reverse(self.success_url.format(**self.object.__dict__), kwargs = {'pk': self.kwargs['pk'], 'slug': self.kwargs['slug']})       
+                else:
+                        try:
+                                url = self.object.get_absolute_url()
+                        except AttributeError:
+                                raise ImproperlyConfigured(
+                                        "No URL to redirect to.  Either provide a url or define"
+                                        " a get_absolute_url method on the Model.")
+                return url
+
+class CreatePostingFormView(LoginRequiredMixin, CreateView):
         template_name = 'student/create_book.html'
         form_class =  PostingForm
         content_type = None
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug'
-        success_url = '/'
+        success_url = 'student:details'
+        login_url = 'login'
 
         def form_valid(self, form):
                 """
@@ -379,22 +478,37 @@ class CreatePostingFormView(CreateView):
                 self.object = form.save()
                 return super().form_valid(form)
 
-class UpdatePostingFormView(UpdateView):
+class UpdatePostingFormView(LoginRequiredMixin, UpdateView):
         template_name = 'student/update_posting.html'
         model = Posting
         pk_url_kwarg = 'pk'
-        # slug_url_kwarg = 'slug' 
-        # query_pk_and_slug = True
+        slug_url_kwarg = 'slug' 
+        query_pk_and_slug = False
         form_class = PostingForm
-        success_url = '/'
+        success_url = 'student:details'
+        login_url = 'login'
 
-class CreateAbsenceRecordFormView(CreateView):
+        def get_success_url(self):
+                """Return the URL to redirect to after processing a valid form."""
+                if self.success_url and  self.kwargs != None:
+                        url = reverse(self.success_url.format(**self.object.__dict__), kwargs = {'pk': self.kwargs['pk'], 'slug': self.kwargs['slug']})       
+                else:
+                        try:
+                                url = self.object.get_absolute_url()
+                        except AttributeError:
+                                raise ImproperlyConfigured(
+                                        "No URL to redirect to.  Either provide a url or define"
+                                        " a get_absolute_url method on the Model.")
+                return url
+
+class CreateAbsenceRecordFormView(LoginRequiredMixin, CreateView):
         template_name = 'student/create_absence.html'
         form_class =  AbsenceRecordForm
         content_type = None
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug'
-        success_url = 'home'
+        success_url = 'student:details'
+        login_url = 'login'
 
         def form_valid(self, form):
                 """
@@ -406,22 +520,50 @@ class CreateAbsenceRecordFormView(CreateView):
                 instance.save()
                 self.object = form.save()
                 return super().form_valid(form)
+
+        def get_success_url(self):
+                """Return the URL to redirect to after processing a valid form."""
+                if self.success_url and  self.kwargs != None:
+                        url = reverse(self.success_url.format(**self.object.__dict__), kwargs = {'pk': self.kwargs['pk'], 'slug': self.kwargs['slug']})       
+                else:
+                        try:
+                                url = self.object.get_absolute_url()
+                        except AttributeError:
+                                raise ImproperlyConfigured(
+                                        "No URL to redirect to.  Either provide a url or define"
+                                        " a get_absolute_url method on the Model.")
+                return url
                 
-class UpdateAbsenceRecordFormView(UpdateView):
+class UpdateAbsenceRecordFormView(LoginRequiredMixin, UpdateView):
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug' 
-        query_pk_and_slug = True
+        query_pk_and_slug = False
         template_name = 'student/update_absence.html'
         form_class = AbsenceRecordForm
-        success_url = 'home'
+        success_url = 'student:details'
+        login_url = 'login'
 
-class CreateOutOfSchoolFormView(CreateView):
+        def get_success_url(self):
+                """Return the URL to redirect to after processing a valid form."""
+                if self.success_url and  self.kwargs != None:
+                        url = reverse(self.success_url.format(**self.object.__dict__), kwargs = {'pk': self.kwargs['pk'], 'slug': self.kwargs['slug']})       
+                else:
+                        try:
+                                url = self.object.get_absolute_url()
+                        except AttributeError:
+                                raise ImproperlyConfigured(
+                                        "No URL to redirect to.  Either provide a url or define"
+                                        " a get_absolute_url method on the Model.")
+                return url
+
+class CreateOutOfSchoolFormView(LoginRequiredMixin, CreateView):
         template_name = 'student/create_out.html'
         form_class =  OutOfSchoolForm
         content_type = None
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug'
-        success_url = 'home'
+        success_url = 'student:details'
+        login_url = 'login'
 
         def form_valid(self, form):
                 """
@@ -434,21 +576,49 @@ class CreateOutOfSchoolFormView(CreateView):
                 self.object = form.save()
                 return super().form_valid(form)
 
-class UpdateOutOfSchoolFormView(UpdateView):
+        def get_success_url(self):
+                """Return the URL to redirect to after processing a valid form."""
+                if self.success_url and  self.kwargs != None:
+                        url = reverse(self.success_url.format(**self.object.__dict__), kwargs = {'pk': self.kwargs['pk'], 'slug': self.kwargs['slug']})       
+                else:
+                        try:
+                                url = self.object.get_absolute_url()
+                        except AttributeError:
+                                raise ImproperlyConfigured(
+                                        "No URL to redirect to.  Either provide a url or define"
+                                        " a get_absolute_url method on the Model.")
+                return url
+
+class UpdateOutOfSchoolFormView(LoginRequiredMixin, UpdateView):
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug' 
         query_pk_and_slug = True
         template_name = 'student/update_out.html'
         form_class = OutOfSchoolForm
-        success_url = 'home'
+        success_url = 'student:details'
+        login_url = 'login'
 
-class CreateReturnToSchoolFormView(CreateView):
+        def get_success_url(self):
+                """Return the URL to redirect to after processing a valid form."""
+                if self.success_url and  self.kwargs != None:
+                        url = reverse(self.success_url.format(**self.object.__dict__), kwargs = {'pk': self.kwargs['pk'], 'slug': self.kwargs['slug']})       
+                else:
+                        try:
+                                url = self.object.get_absolute_url()
+                        except AttributeError:
+                                raise ImproperlyConfigured(
+                                        "No URL to redirect to.  Either provide a url or define"
+                                        " a get_absolute_url method on the Model.")
+                return url
+
+class CreateReturnToSchoolFormView(LoginRequiredMixin, CreateView):
         template_name = 'student/create_return.html'
         form_class =  ReturnToSchoolForm
         content_type = None
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug'
-        success_url = 'home'
+        success_url = 'student:details'
+        login_url = 'login'
 
         def form_valid(self, form):
                 """
@@ -461,21 +631,49 @@ class CreateReturnToSchoolFormView(CreateView):
                 self.object = form.save()
                 return super().form_valid(form)
 
-class UpdateReturnToSchoolFormView(UpdateView):
+        def get_success_url(self):
+                """Return the URL to redirect to after processing a valid form."""
+                if self.success_url and  self.kwargs != None:
+                        url = reverse(self.success_url.format(**self.object.__dict__), kwargs = {'pk': self.kwargs['pk'], 'slug': self.kwargs['slug']})       
+                else:
+                        try:
+                                url = self.object.get_absolute_url()
+                        except AttributeError:
+                                raise ImproperlyConfigured(
+                                        "No URL to redirect to.  Either provide a url or define"
+                                        " a get_absolute_url method on the Model.")
+                return url
+
+class UpdateReturnToSchoolFormView(LoginRequiredMixin, UpdateView):
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug' 
-        query_pk_and_slug = True
+        query_pk_and_slug = False
         template_name = 'student/update_return.html'
         form_class = ReturnToSchoolForm
-        success_url = 'home'
+        success_url = 'student:details'
+        login_url = 'login'
 
-class CreateFeedingFormView(CreateView):
+        def get_success_url(self):
+                """Return the URL to redirect to after processing a valid form."""
+                if self.success_url and  self.kwargs != None:
+                        url = reverse(self.success_url.format(**self.object.__dict__), kwargs = {'pk': self.kwargs['pk'], 'slug': self.kwargs['slug']})       
+                else:
+                        try:
+                                url = self.object.get_absolute_url()
+                        except AttributeError:
+                                raise ImproperlyConfigured(
+                                        "No URL to redirect to.  Either provide a url or define"
+                                        " a get_absolute_url method on the Model.")
+                return url
+
+class CreateFeedingFormView(LoginRequiredMixin, CreateView):
         template_name = 'student/create_feeding.html'
         form_class =  FeedingForm
         content_type = None
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug'
-        success_url = 'home'
+        success_url = 'student:details'
+        login_url = 'login'
 
         def form_valid(self, form):
                 """
@@ -488,12 +686,39 @@ class CreateFeedingFormView(CreateView):
                 self.object = form.save()
                 return super().form_valid(form)
 
-class UpdateFeedingFormView(UpdateView):
+        def get_success_url(self):
+                """Return the URL to redirect to after processing a valid form."""
+                if self.success_url and  self.kwargs != None:
+                        url = reverse(self.success_url.format(**self.object.__dict__), kwargs = {'pk': self.kwargs['pk'], 'slug': self.kwargs['slug']})       
+                else:
+                        try:
+                                url = self.object.get_absolute_url()
+                        except AttributeError:
+                                raise ImproperlyConfigured(
+                                        "No URL to redirect to.  Either provide a url or define"
+                                        " a get_absolute_url method on the Model.")
+                return url
+
+class UpdateFeedingFormView(LoginRequiredMixin, UpdateView):
         pk_url_kwarg = 'pk'
         slug_url_kwarg = 'slug' 
-        query_pk_and_slug = True
+        query_pk_and_slug = False
         template_name = 'student/update_feeding.html'
         form_class = FeedingForm
-        success_url = 'home'
+        success_url = 'student:details'
+        login_url = 'login'
+
+        def get_success_url(self):
+                """Return the URL to redirect to after processing a valid form."""
+                if self.success_url and  self.kwargs != None:
+                        url = reverse(self.success_url.format(**self.object.__dict__), kwargs = {'pk': self.kwargs['pk'], 'slug': self.kwargs['slug']})       
+                else:
+                        try:
+                                url = self.object.get_absolute_url()
+                        except AttributeError:
+                                raise ImproperlyConfigured(
+                                        "No URL to redirect to.  Either provide a url or define"
+                                        " a get_absolute_url method on the Model.")
+                return url
 
 
