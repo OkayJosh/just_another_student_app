@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -39,8 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'crispy_forms',
+    'app',
 
-    'app'
+    'django.contrib.admin',
 ]
 
 MIDDLEWARE = [
@@ -125,3 +125,5 @@ STATIC_URL = '/static/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
+
+LOGIN_REDIRECT_URL = 'student:home'

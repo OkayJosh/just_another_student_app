@@ -4,7 +4,7 @@
   <div class="container"> 
     <h1>Students Management</h1>
     <div class="wrap">
-        <h5><a href={% url 'create' %} class="btn-floating btn-large pulse pink darken-1"><i class="material-icons">add_circle</i></a></h5>
+        <h5><a href={% url 'student:create' %} class="btn-floating btn-large pulse pink darken-1"><i class="material-icons">add_circle</i></a></h5>
     </div>
   </div>
     <div class="container">
@@ -23,8 +23,8 @@
                 <tbody>
                     {% for student in students %}
                         <tr>
-                            <td><a href="{% url 'details' student.pk student.slug %}">{{ student }} </a> </td>
-                            <td><a href="{% url 'update' student.pk student.slug %}"><i class="">{{ student.addmission_number_of_student}}</i></a></td>
+                            <td><a href="{% url 'student:details' student.pk student.slug %}">{{ student }} </a> </td>
+                            <td><a href="{% url 'student:update' student.pk student.slug %}"><i class="">{{ student.addmission_number_of_student}}</i></a></td>
                             <td><a><i class="">{{ student.reason_for_admission}}</i></a></td>
                             </tr>
                     {% endfor %}

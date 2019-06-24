@@ -22,11 +22,14 @@
   <body>
   <nav class="nav-background-image">
     <div class="nav-wrapper pink darken-1 ">
-      <a href="{% url 'home' %}" class="brand-logo btn-floating btn-large center pink-darken-1"><i class="material-icons">person_pin</i></a>
+      <a href="{% url 'student:home' %}" class="brand-logo btn-floating btn-large center pink-darken-1"><i class="material-icons">person_pin</i></a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
-        <li><a href="">login</a></li>
-        {% comment %} <li><a href="{% url 'login' %}">login</a></li> {% endcomment %}
-        <li><a href="">Signup</a></li>
+      {% if user.is_authenticated %}
+      <li><a href="{% url 'logout' %}">logout:{{request.user.username}}</a></li>
+      {% else %}
+        <li><a href="{% url 'login' %}">login</a></li>
+        <li><a href="{% url 'student:signup' %}">Signup</a></li>
+      {% endif %}
         <li><a href="">About</a></li>
       </ul>
     </div>
