@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+  {% block heading %}
+    <div class="container">
+      <h2>Signup</h2>
+    </div>
+  {% endblock heading %}
+
+  {% block content %}
+   <div class="container"> 
+         <form action="" method="post">
+            {% csrf_token %}
+            {{ form }}
+            <button class="btn btn-dark">Go</button>
+        </form>
+    </div> 
+
+{% endblock content %}
