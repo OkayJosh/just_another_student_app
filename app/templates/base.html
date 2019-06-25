@@ -23,7 +23,7 @@
   <nav class="nav-background-image">
     <div class="nav-wrapper pink darken-1 ">
       <a href="{% url 'student:home' %}" class="brand-logo btn-floating btn-large center pink-darken-1"><i class="material-icons">person_pin</i></a>
-      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <ul>
       {% if user.is_authenticated %}
       <li><a href="{% url 'logout' %}">logout:{{request.user.username}}</a></li>
       {% else %}
