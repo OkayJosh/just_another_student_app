@@ -20,13 +20,9 @@
             <a href="{% url 'student:absence' object.pk object.slug%}" class=""><i class="material-icons large">call_missed</i></a>
             <a href="{% url 'student:out' object.pk object.slug%}" class=""><i class="material-icons large">call_made</i></a>
             <a href="{% url 'student:return' object.pk object.slug%}" class=""><i class="material-icons large">call_received</i></a></h5> 
-            <div class="col">
+            <div class="">
                 <div class="dashboard">FGN Code: {{object.federal_goverment_code}}</div>
-            </div>
-            <div class="col">
-                <div class="dashboard">Addmission Number: {{object.addmission_number_of_student}}</div>
-            </div>
-            <div class="col">  
+                <div class="dashboard">Addmission Number: {{object.addmission_number_of_student}}</div> 
                 <div class="dashboard">State of Residence: {{object.state_residence}}</div>
             </div> 
         </div>
