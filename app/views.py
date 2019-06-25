@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.urls import reverse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -57,7 +57,7 @@ class CreateStudentFormView(LoginRequiredMixin, CreateView):
                 instance.created_by = self.request.user
                 instance.save()
                 self.object = form.save()
-                return super().form_valid(form)
+                return redirect(self.get_success_url())
 
 class UpdateStudentFormView(LoginRequiredMixin, UpdateView):
         model = Student # The model is required alongside the "form_class"
