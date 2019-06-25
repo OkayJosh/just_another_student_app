@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+  {% block heading %}
+    <div class="container">
+      {{ title }}
+    </div>
+  {% endblock heading %}
+
+  {% block content %}
+   <div class="container"> 
+        <a class="nav-item nav-link" href="{% url 'login' %}">Login</a>
+    </div> 
+{% endblock content %}

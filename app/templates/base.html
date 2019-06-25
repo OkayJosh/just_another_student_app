@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+   <!-- Material css -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+   <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
+
+  <!---- Load local css ---->
+  {% load  static %}
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <title>Student App</title>
+  </head>
+  <body>
+  <nav class="nav-background-image">
+    <div class="nav-wrapper pink darken-1 ">
+      <a href="{% url 'student:home' %}" class="brand-logo btn-floating btn-large center pink-darken-1"><i class="material-icons">person_pin</i></a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      {% if user.is_authenticated %}
+      <li><a href="{% url 'logout' %}">logout:{{request.user.username}}</a></li>
+      {% else %}
+        <li><a href="{% url 'login' %}">login</a></li>
+        <li><a href="{% url 'student:signup' %}">Signup</a></li>
+      {% endif %}
+      </ul>
+    </div>
+  </nav>
+  {% block heading %}
+    <div class="container">
+        <h1>Django-Africa demo for login!</h1>
+    </div>
+  {% endblock heading %}
+
+  {% block content %}
+ {% comment %} content here {% endcomment %}
+  {% endblock content %}
+  
+  {% block morecontent %}
+  {% comment %} more content  here {% endcomment %}
+  {% endblock morecontent %}
+
+{% block footer %}
+  <footer >
+  <div class="nav-wrapper pink darken-1">
+    Features
+    <ol class="center" >
+    <li>Book Tracking</li>
+    <li>Out of School tracking</li>
+    <li>Parent Tacking</li>
+    <li>Incentive Tracking</li>
+    <li>Abscence Tracking</li>
+    <li>Return to school Tracking</li>
+    <li>Literacy Tracking</li>
+    <li>Appraisal Tracking</li>
+    <li>Posting Tracking</li>
+    </ol>
+    </div>
+  </footer>
+{% endblock footer %}
+
+         
+  </body>
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+</html>
