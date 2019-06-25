@@ -66,7 +66,7 @@ class UpdateStudentFormView(LoginRequiredMixin, UpdateView):
         query_pk_and_slug = True
         template_name = 'student/update.html'
         form_class = StudentForm
-        success_url = 'home'
+        success_url = home
         login_url = 'login'
         permission_denied_message = 'you must be logged in to update user'
 
