@@ -1,4 +1,4 @@
-/stapp
+stapp
 */migrations
 /db.sqlite
 *.pyc
