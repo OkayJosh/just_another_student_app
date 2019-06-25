@@ -66,9 +66,21 @@ class UpdateStudentFormView(LoginRequiredMixin, UpdateView):
         query_pk_and_slug = True
         template_name = 'student/update.html'
         form_class = StudentForm
-        success_url = None
+        success_url = 'student:home'
         login_url = 'login'
-        permission_denied_message = 'you must be logged in to update user'
+
+        def get_success_url(self):
+                """Return the URL to redirect to after processing a valid form."""
+                if self.success_url and  kwargs != None:
+                        url = reverse(self.success_url.format(**self.object.__dict__))        
+                else:
+                        try:
+                                url = self.object.get_absolute_url()
+                        except AttributeError:
+                                raise ImproperlyConfigured(
+                                        "No URL to redirect to.  Either provide a url or define"
+                                        " a get_absolute_url method on the Model.")
+                return url
 
 class DetailStudentView(DetailView):
         template_name = 'student/details.html'
