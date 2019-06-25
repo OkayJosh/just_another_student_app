@@ -1,7 +1,7 @@
 from .base import *
 
 DEBUG = config('DEBUG', cast=bool)
-ALLOWED_HOSTS = ['.herokuapps', '.etentlabs.com']
+ALLOWED_HOSTS = ['.herokuapps.com', '.etentlabs.com']
 
 DATABASES = {
     'default': {

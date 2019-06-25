@@ -1,4 +1,5 @@
 import os
+import django_heroku
 from decouple import config
 
 
@@ -94,9 +95,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-
 
 #Login redirect
 LOGIN_REDIRECT_URL = 'student:home'
+
+#Heroku settings
+django_heroku.settings(locals())
