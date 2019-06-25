@@ -1,6 +1,6 @@
 from .base import *
 
-DEBUG = config('DEBUG', cast=bool)
+DEBUG = False
 ALLOWED_HOSTS = ['stumas.herokuapp.com', 'stumas.etentlabs.com', '127.0.0.1']
 
 DATABASES = {
