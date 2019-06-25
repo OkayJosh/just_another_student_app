@@ -9,7 +9,6 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
    <!-- Compiled and minified CSS -->
-   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.css">
 
@@ -30,7 +29,6 @@
         <li><a href="{% url 'login' %}">login</a></li>
         <li><a href="{% url 'student:signup' %}">Signup</a></li>
       {% endif %}
-        <li><a href="">About</a></li>
       </ul>
     </div>
   </nav>
@@ -49,8 +47,21 @@
   {% endblock morecontent %}
 
 {% block footer %}
-  <footer>
-    
+  <footer >
+  <div class="nav-wrapper pink darken-1">
+    Features
+    <ol class="center" >
+    <li>Book Tracking</li>
+    <li>Out of School tracking</li>
+    <li>Parent Tacking</li>
+    <li>Incentive Tracking</li>
+    <li>Abscence Tracking</li>
+    <li>Return to school Tracking</li>
+    <li>Literacy Tracking</li>
+    <li>Appraisal Tracking</li>
+    <li>Posting Tracking</li>
+    </ol>
+    </div>
   </footer>
 {% endblock footer %}
 
