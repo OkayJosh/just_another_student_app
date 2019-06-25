@@ -71,7 +71,7 @@ class UpdateStudentFormView(LoginRequiredMixin, UpdateView):
 
         def get_success_url(self):
                 """Return the URL to redirect to after processing a valid form."""
-                if self.success_url
+                if self.success_url:
                         url = reverse(self.success_url.format(**self.object.__dict__))        
                 else:
                         try:
